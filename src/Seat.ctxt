@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=rowNumber\ seatNumber
+comment0.target=Seat(int,\ int)
+comment1.params=
+comment1.target=int\ getRow()
+comment2.params=
+comment2.target=int\ getNumber()
+comment3.params=
+comment3.target=boolean\ isBooked()
+comment4.params=
+comment4.target=void\ changeStatus()
+numComments=5

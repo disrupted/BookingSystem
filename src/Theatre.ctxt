@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Theatre()
+comment1.params=rowLength
+comment1.target=void\ addSeatRow(int)
+comment2.params=
+comment2.target=java.lang.String\ getName()
+comment3.params=
+comment3.target=int\ getNumberOfSeats()
+comment4.params=
+comment4.target=void\ showSeats()
+numComments=5

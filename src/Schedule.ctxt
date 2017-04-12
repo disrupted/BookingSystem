@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Schedule()
+comment1.params=name\ theatreNumber\ time
+comment1.target=void\ addScreening(java.lang.String,\ int,\ int)
+numComments=2
