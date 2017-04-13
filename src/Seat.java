@@ -1,4 +1,4 @@
-public class Seat {
+ public class Seat {
     private int row, number;
     private boolean booked = false;
 

@@ -1,12 +1,12 @@
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Theatre {
-    private ArrayList<Seat> seats;
+    private HashSet<Seat> seats;
     protected int rowNumber = 0;
     protected String name;
 
     public Theatre() {
-        seats = new ArrayList<>();
+        seats = new HashSet<Seat>();
     }
 
     public void addSeatRow(int rowLength) {
@@ -25,13 +25,13 @@ public class Theatre {
         return seats.size();
     }
 
-    public void showSeats() {
+    public String getSeatStatus() {
         String result = "";
         for (Seat seat : seats) {
             String status = "";
             if (seat.isBooked()) status = "booked"; else status = "free";    
             result += "row: " + seat.getRow() + " - number: " + seat.getNumber() + " - " + status + "\n";
         }
-        System.out.println(result);
+        return result;
     }
 }
