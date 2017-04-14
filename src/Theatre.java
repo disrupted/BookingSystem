@@ -25,6 +25,10 @@ public class Theatre {
         return seats.size();
     }
 
+    public HashSet getSeats(){
+        return seats;
+    }
+
     public String getSeatStatus() {
         String result = "";
         for (Seat seat : seats) {

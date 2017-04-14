@@ -22,4 +22,8 @@
     public void changeStatus() {
         booked = !booked;
     }
+    
+    public void bookedFalse(){
+        booked = false;
+    }
 }
