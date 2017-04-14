@@ -1,12 +1,11 @@
 import java.util.HashSet;
 /*
- * der Stundeplan fürs Kino, funktioniert erstmal nur für einen Tag und ohne auf die Zeit richtig zu achten
+ * der Stundenplan fürs Kino, funktioniert erstmal nur für einen Tag und ohne auf die Zeit richtig zu achten
  */
 class Schedule {
 
     HashSet<Screening> showsOnCurrentDay;
-    private int screeningNumber; //gibt jedem Screening automatisch beim erstellen 
-    //eine nummer, sodass sie einfach unterscheidbar sind
+    private int screeningNumber; //gibt jedem Screening automatisch beim erstellen eine Nr, sodass sie einfach unterscheidbar sind
 
     public Schedule() {
         showsOnCurrentDay = new HashSet<Screening>();

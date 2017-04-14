@@ -35,10 +35,9 @@ public class BookingSystem {
 
         while(!finished) {
             String input = getInput();
-            if(input.contains("quit")) {
+            if (input.contains("quit")) {
                 finished = true;
-            }
-            else{
+            } else {
                 if (input.equals("book")) {
                     System.out.println("booked");
                     //Booking booking = new Booking();
@@ -47,7 +46,7 @@ public class BookingSystem {
                     schedule.showCurrentDay();
                 }
                 /*
-                 * show hinzufügen, das interface fragt nach Namen, Zeit und Theater
+                 * Show hinzufügen, das Interface fragt nach Namen, Zeit und Kinosaal
                  */
                 if (input.equals("add show")){
                     System.out.println("Please enter the name of the screening");
@@ -61,8 +60,8 @@ public class BookingSystem {
                         if(maybeNumber.matches("[0-9]+") && maybeNumber.length() == 1) {
                             int theatreNumber = Integer.parseInt(maybeNumber);
                             schedule.addScreening(name, theatreNumber, time);
-                             System.out.println("you seucessfully added a show to the schedule");
-                             System.out.println("\n Main menu: \n");
+                            System.out.println("you seucessfully added a show to the schedule");
+                            System.out.println("\n Main menu: \n");
                         }else{
                             System.out.println("we have only theatres 1 - 6");
                             System.out.println("adding unsucessful");
@@ -75,10 +74,8 @@ public class BookingSystem {
                     }
                 }
 
-                //schow aussuchen
-                
-                    
-                
+                //Show aussuchen
+
                 if (input.equals("inspect")) {
                     boolean inspecting = true;
                     System.out.println("Inspecting menu: \n");
@@ -89,10 +86,10 @@ public class BookingSystem {
                             inspecting = false;
                             System.out.println("\n Main menu: \n");
                         }
+                        try {
+                            int numberToSearch = Integer.parseInt(input);
 
-                        try{int numberToSearch = Integer.parseInt(input);
-
-                            // in der Schow drin
+                            // in der Show drin
                             if (schedule.isThereThisScreeningNumber(numberToSearch) == true){
                                 Screening currentInspectedScreening = schedule.getScreeningByNumber(numberToSearch);
                                 boolean inspectingShow = true;
@@ -112,15 +109,12 @@ public class BookingSystem {
                                     if(input.equals("book")){
                                         System.out.println("to be continued...");
                                     }
-
                                 }
                             }
-                        }catch(Exception e){}
+                        } catch (Exception e) { }
                     }
                 }
-
             }
-
         }
         printGoodbye();
     }
@@ -128,8 +122,6 @@ public class BookingSystem {
     public String getInput() {
         System.out.print("> ");                // print prompt
         return reader.nextLine();              // gibt die komplete line aus
-
-        //return reader.nextLine().trim().toLowerCase();  - old one
     }
 
     public void addCustomer(String name, String telephoneNumber) {

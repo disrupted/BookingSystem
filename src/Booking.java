@@ -9,9 +9,9 @@ public class Booking
         this.customer = customer;
     }
 
-   /*
-    * fügt einen gewünschten Sitzlatz zur Buchung hinze
-    */
+    /*
+     * fügt einen gewünschten Sitzlatz zur Buchung hinzu
+     */
     public void bookSeat(int row, int seatNumber) {
         boolean alreadyBooked = false;
         for (Seat seat: bookedSeats){
@@ -19,9 +19,9 @@ public class Booking
                 alreadyBooked = true;
             }
         }
-        if(alreadyBooked == true){
+        if (alreadyBooked == true) {
             System.out.println("You already booked this seat");
-        }else{
+        } else {
             bookedSeats.add(new Seat(row, seatNumber));
         }
     }
@@ -29,7 +29,7 @@ public class Booking
     //bookAdjoinedSeats()  kommt vllcht später
 
     /*
-     * löscht eine ngewünschten Sitzplatz von der Buchung
+     * löscht einen ungewünschten Sitzplatz von der Buchung
      */
     public void unbookSeat(int row, int seatNumber) {
         for (Seat seat: bookedSeats){
@@ -42,7 +42,7 @@ public class Booking
     }
 
     /*
-     * zeigt alle gewünschten plätze dieser Buchung - wird vom Screening weiterbenutzt
+     * zeigt alle gewünschten Plätze dieser Buchung - wird vom Screening weiterbenutzt
      */
     public String showBookedSeats(){
         String result = "";
@@ -56,7 +56,7 @@ public class Booking
         }
         return result;   
     }
-    
+
     /*
      * gibt uns den Kunden zurück, wird vom Screening weiterbenutzt
      */
