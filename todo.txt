@@ -1,4 +1,3 @@
-- deleting booking funktioniert nicht ganz - Error
 - BookingSystem Classe säubern , schöner machen
 - Preis implementieren, vllcht Klasse zum Tickets drucken?
 - bookAdjoined seats Methode
