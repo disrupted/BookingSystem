@@ -5,15 +5,12 @@ import java.util.HashSet;
 class Schedule {
 
     HashSet<Screening> showsOnCurrentDay;
-    private int screeningNumber; //gibt jedem Screening automatisch beim erstellen 
-    //eine nummer, sodass sie einfach unterscheidbar sind
+    //gibt jedem Screening automatisch beim erstellen eine nummer, sodass sie einfach unterscheidbar sind
+    private int screeningNumber; 
 
     public Schedule() {
         showsOnCurrentDay = new HashSet<Screening>();
         screeningNumber = 0;
-        //Theatre1 theatre1 = new Theatre1();
-        //System.out.println(theatre1.getName() + " - " + theatre1.getNumberOfSeats());
-        //addScreening("Hulk", 1, 8); // Test movie at 8pm in theatre 1
     }
 
     public void addScreening(String name, int theatreNumber, int time) {
@@ -32,7 +29,7 @@ class Schedule {
     }
 
     /*
-     * Methode für das Booking System um das richtige Screening zu finden
+     * Methode für das Booking System um das richtige Screening zu finden CHECK-Methode
      */
     public  boolean isThereThisScreeningNumber(int number){
         for(Screening screening : showsOnCurrentDay){

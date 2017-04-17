@@ -1,5 +1,8 @@
 import java.util.Scanner;
-
+/*
+ * Interface between the user and the programm, starts the programm with the main method and prints questions and status of the programm - like in the zuul game
+ * a bit messy so far
+ */
 public class BookingSystem {
     private Customer customer;
     private Scanner reader;

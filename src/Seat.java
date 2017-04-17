@@ -1,3 +1,10 @@
+/**
+ * Object of this class are representing a seat throughout a screening 
+ * (the same "real" seat is represented by a different instance on two different screenings in this programm)
+ * 
+ * Responsibilities: The seat object knows its row and number and know if it is booked or not,
+ * also it can be booked or unbooked via the changeStatus() Method
+ */
  public class Seat {
     private int row, number;
     private boolean booked = false;

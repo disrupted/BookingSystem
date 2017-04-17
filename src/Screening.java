@@ -1,6 +1,11 @@
 import java.util.HashSet;
 import java.util.Iterator;
-
+/**
+ * Instances of this class are representing one specific show in the cinema, 
+ * (the same movie on a different day or time is also a different show)
+ * 
+ * Responsibilities:
+ */
 public class Screening {
     Theatre myTheatre;
     private int number;
@@ -20,7 +25,7 @@ public class Screening {
     }
 
     /*
-     * Methoden für die Schedule..
+     * Methods for the schedule-class
      */
     public int getNumber(){
         return number;
@@ -77,14 +82,18 @@ public class Screening {
         Iterator<Booking> bi = myBookings.iterator();
         while(bi.hasNext()){
             Booking currentBooking = bi.next();
-            if(currentBooking.getCustomer().getName() == name){
+            if(currentBooking.getCustomer().getName().equals(name)){
                 myBookings.remove(currentBooking);
                 System.out.println("deleted sucessfully");
+                return;
             }
         }
         System.out.println("Error - could not delete");
     }
    
+    /*
+     * returns a Booking from the screening-HashSet Collection of Bookings
+     */
     public Booking getBooking(String name){
         for(Booking booking: myBookings){
             if(booking.getCustomer().getName().equals(name)){
@@ -133,7 +142,9 @@ public class Screening {
         System.out.println(result);
     }
 
-    //dies updated die Anfragen von Sitzplätzen von den Bookings und den Theaterplätzen, sodass die Methode get Seat status immer aktuell ist
+    /*
+     * dies updated die Anfragen von Sitzplätzen von den Bookings und den Theaterplätzen, sodass die Methode getSeatStatus immer aktuell ist
+     */
     private void updateSeats(){
         HashSet<Seat> theatreSeats = myTheatre.getSeats();
         //löscht alle Plätze von dem Theater - dies sorgt dafür, dass vom Booking entfernte Plätze nicht besetzt bleiben
