@@ -1,0 +1,38 @@
+1. Wir haben den Vorschlag der Gruppe von Bernard und Markus gewählt, 
+die beiden Ideen waren ziemlich ähnlich, aber die vorher erwähnte Gruppe war einfach etwas weiter in der Planung
+
+
+2. Was sollen wir hier schreiben?
+
+Die Grundstrunktur unseres Systems sind die Seat, Theater, und Screening Klassen.
+
+Die Seat Klasse weiß bescheid welche nummer und welche Reihe ein Seat Objekt hat und ob es besetzt ist oder nicht.
+
+Ein Theater fasst diese Seat Objekte zusammen, wir haben eine Theater Oberklasse mit allen nötigen Methoden,
+die richtigen Theater jedoch, in welchen die Filme satttfinden sollten, sind die Unterklassen, mit denen man mit einigen zeitlen code schnell
+ein neues individuelles Theater erzeugen kann.
+
+Ein Screening Objekt sympolisiert eine Ausstrahlung (der gleiche Film am selben Tag mit anderen uhrzeiten sind zwei seperate Screenings)
+jedes Screening weiß über den Preis die uhrzeit und die freien Plätze bescheid. Die Informationen über die Plätze bezieht das Screening 
+von einem Theater-Objekt, welches speziell für dieses Screening erstellt wird, dieses hat dann wiederrum Seat Objekte in sich 
+- somit haben die einzigen Klassen sowenig Verantwortung wie möglich.
+
+Außerdem speichert ein Screening Booking Objekte in einer HashMap. Diese wirken auf die Belegung der Sitze und können von den Kinomitarbeitern jeweils geändert oder gelöscht werden. 
+Jedes Booking enthält ein Customer Objekt, welches jediglich Daten zum Kunden speichert.
+
+Die Schedule Klasse liegt über allen bisher genannten klassen, diese erlaubt es - im Prototypen bislang nur für einen Tag - Screenings zu erstellen
+und in einem Stundenplan zu speichern
+
+Die Booking System klasse ist für die main Methode, also das starten von allem und für das interface mit dem User zuständig, 
+welches noch ziemlich unsauber ist, aber es funktioniert :)
+
+
+
+
+3. Wir nutzten fast ale klassen unseres Plans - jediglich die Row Klasse haben wir weggelassen. 
+Außerdem haben wir eine Klasse hinzugefügt, die BookingSystem-Klasse, 
+welche alle anderen Klassen mit der Main-methode startet und ein user interface bereitstellen, 
+durch dieses User Interface, dass mit einem Scanner Objekt arbeitet und System.out.print Befehle benutzt wurde das Programm auch getestet.
+
+
+4. Einfach alles in Eclipse Kopieren, in 2 packages aufteilen und screenschotten
