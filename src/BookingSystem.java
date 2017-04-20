@@ -7,6 +7,7 @@ public class BookingSystem {
     private Customer customer;
     private Scanner reader;
     private Schedule schedule;
+    boolean finished = false;
 
     public BookingSystem() {
         schedule = new Schedule();
@@ -21,9 +22,16 @@ public class BookingSystem {
 
     private void printWelcome() {
         System.out.println("Welcome to Ultimate Booking System !");
-        System.out.println("\n Main Menu:");
-        System.out.println("type \"show Schedule\" and then \"inspect\" to go to inspect the seat status or book");
-        System.out.println("type \"add show\" to add a show to the schedule \n");
+        printMenu();
+    }
+
+    private void printMenu() {
+        System.out.println("\nMain Menu:");
+        //System.out.println("type \"show schedule\" to see today's screenings");
+        System.out.println("type \"add show\" to add a show to the schedule\ntype \"quit\" when you are finished\n");
+        System.out.println("----------------------------------------------");
+        schedule.showCurrentDay();
+        System.out.println("Please pick a Screening: (1-" + schedule.getTotalNumberOfScreenings() + ")");
     }
 
     private void printGoodbye() {
@@ -35,180 +43,173 @@ public class BookingSystem {
      */
     public void start() {
         printWelcome();
-        boolean finished = false;
 
         while (!finished) {
             String input = getInput();
-            if (input.contains("quit")) {
-                finished = true;
-            } else {
-                if (input.equals("book")) {
-                    System.out.println("booked");
-                }
-                if (input.equals("show schedule")) {
+            int number = 0;
+            try {
+                number = Integer.parseInt(input);
+            } catch (Exception e) { }
+            if ((number > 0) && (schedule.screeningExists(number))) {
+                Screening screening = schedule.getScreening(number);
+                inspect(screening);
+            } else { 
+                switch (input) {
+                    case "quit":
+                    finished = true;
+                    break;
+                    case "show schedule":
                     schedule.showCurrentDay();
-                }
-                /*
-                 * Show hinzufügen, das interface fragt nach Namen, Zeit und Theater
-                 */
-                if (input.equals("add show")) {
-                    System.out.println("Please enter the name of the screening");
-                    String name = reader.next();
-                    System.out.println("Please enter the time of the screening");
-                    String maybeTime = reader.next();
-                    if (maybeTime.matches("[0-9]+") && maybeTime.length() <= 2) {
-                        int time = Integer.parseInt(maybeTime);
-                        System.out.println("Please enter the number of the theatre");
-                        String maybeNumber = reader.next();
-                        if (maybeNumber.matches("[0-9]+") && maybeNumber.length() == 1) {
-                            int theatreNumber = Integer.parseInt(maybeNumber);
-                            schedule.addScreening(name, theatreNumber, time);
-                            System.out.println("you seucessfully added a show to the schedule");
-                            System.out.println("\n Main menu: \n");
-                        } else {
-                            System.out.println("we have only theatres 1 - 6");
-                            System.out.println("adding unsucessful");
-                            System.out.println("\n Main menu: \n");
-                        }
-                    } else {
-                        System.out.println("please use numbers from 0 to 23 for the time");
-                        System.out.println("adding unsucessful");
-                        System.out.println("\n Main menu: \n");
-                    }
-                }
-
-                /*
-                 * Show aussuchen    
-                 */                                                
-                if (input.equals("inspect")) {
-                    boolean inspecting = true;
-                    System.out.println("Inspecting menu: \n");
-                    System.out.println("which show do you want to inspect? - type in the number, type stop to stop the inspection");
-                    while (inspecting) {
-                        input = getInput();
-                        if (input.equals("stop")) {
-                            inspecting = false;
-                            System.out.println("\n Main menu: \n");
-                        }
-                        try {
-                            int numberToSearch = Integer.parseInt(input);
-
-                            // in der Show drin
-                            if (schedule.isThereThisScreeningNumber(numberToSearch)){
-                                Screening currentInspectedScreening = schedule.getScreeningByNumber(numberToSearch);
-                                boolean inspectingShow = true;
-                                System.out.println("\n You are currently inspecting " + currentInspectedScreening.getName() +" at " + currentInspectedScreening.getTime());
-                                System.out.println("type \"back\" to go back to inspect all shows");
-                                System.out.println("type \"show\" to show aviable seats, type \"book\" to go to the booking menu \n");
-                                while (inspectingShow) {
-                                    input = getInput();
-                                    if (input.equals("back")) {
-                                        inspectingShow = false;
-                                        System.out.println("Inspecting menu: \n");
-                                        System.out.println("which show do you want to inspect? - type in the number, type stop to stop the inspection");
-                                    }
-                                    if (input.equals("show")) {
-                                        currentInspectedScreening.getSeatStatus();
-                                    }
-
-                                    // Booking
-                                    if (input.equals("book")) {
-                                        boolean booking = true;
-                                        System.out.println("Booking menu: \n");
-                                        System.out.println("type \"new\" to create a new booking, \"edit\" to edit a booking");
-                                        System.out.println("type \"show bookings\" see all bookings");
-                                        System.out.println("or \"delete\" to delete a booking - type \"back\" to go back to Show-inspection menu");
-                                        while (booking) {
-                                            input = getInput();
-                                            if (input.equals("show bookings")) {
-                                                currentInspectedScreening.showBookings();
-                                            }
-                                            if (input.equals("back")) {
-                                                System.out.println("Show-Inspecting menu: \n");
-                                                System.out.println("\n You are currently inspecting " + currentInspectedScreening.getName() +" at " + currentInspectedScreening.getTime());
-                                                System.out.println("type \"back\" to go back to inspect all shows");
-                                                System.out.println("type \"show\" to show aviable seats, type \"book\" to go to the booking menu \n");
-                                                booking = false;
-                                            }
-                                            if (input.equals("new")) {
-                                                System.out.println("Please enter the name of customer");
-                                                String name = reader.next();
-                                                System.out.println("Please enter the telephone numbere of customer");
-                                                String telephoneNumber = reader.next();
-                                                currentInspectedScreening.createBooking(name, telephoneNumber);
-                                                System.out.println("Sucessfuly created new booking");
-                                                //beim erstellen eines Bookings wird man automatisch zu der bearbeitung des bookings weitergeleitet
-                                            }
-                                            if (input.equals("edit")) {
-                                                System.out.println("Please enter the name of customer assigned to the booking");
-                                                String name = reader.next();
-                                                if (currentInspectedScreening.bookingEditable(name)) {
-                                                    //edit booking
-                                                    System.out.println("What do you want to edit? type \"add\" to add seat, type \"delete\" to delete seat, \"back\" to go back");
-                                                    boolean bookingIsEdited =true;
-                                                    Booking inspectedBooking =  currentInspectedScreening.getBooking(name);
-                                                    while (bookingIsEdited) {
-                                                        input = getInput();
-                                                        if (input.equals("back")) {      
-                                                            System.out.println("Booking menu: \n");
-                                                            System.out.println("type \"new\" to create a new booking, \"edit\" to edit a booking");
-                                                            System.out.println("type \"show bookings\" see all bookings");
-                                                            System.out.println("or \"delete\" to delete a booking - type \"back\" to go back to inspection menu");
-                                                            bookingIsEdited = false;
-                                                        }
-                                                        if (input.equals("add")) {
-                                                            System.out.println("Please enter the row of the seat");
-                                                            int row = reader.nextInt();
-                                                            System.out.println("Please enter the number of the seat");
-                                                            int number = reader.nextInt();
-                                                            inspectedBooking.bookSeat(row, number);
-                                                            System.out.println("Seat reservation sucessfully added to reservation");
-                                                        }
-                                                        if (input.equals("delete")) {
-                                                            System.out.println("Please enter the row of the seat");
-                                                            int row = reader.nextInt();
-                                                            System.out.println("Please enter the number of the seat");
-                                                            int number = reader.nextInt();
-                                                            inspectedBooking.unbookSeat(row, number);
-                                                            System.out.println("Seat reservation sucessfully deleted from reservation");
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            if (input.equals("delete")) {
-                                                //ask for the name of the customer, so we can find the right booking to delete
-                                                System.out.println("Please enter the name of customer assigned to the booking");
-                                                String name = reader.next();
-                                                currentInspectedScreening.deleteBooking(name);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }catch (Exception e) { }
-                    }
+                    break;
+                    case "add show":
+                    addShow();
+                    break;
+                    default:
+                    System.out.println("Invalid input.");
+                    printMenu();
+                    break;
                 }
             }
         }
         printGoodbye();
     }
 
-    private void editBooking(String name, Screening currentInspectedScreening){
+    /*
+     * Show hinzufügen, das interface fragt nach Namen, Zeit und Theater
+     */
+    private void addShow() {
+        System.out.println("Please enter the name of the screening: ");
+        String name = reader.next();
+        System.out.println("Please enter the time of the screening: (0-23)");
+        String maybeTime = reader.next();
+        System.out.println("Please enter the number of the theatre: (1-6)");
+        String maybeNumber = reader.next();    
+        if (maybeTime.matches("[0-9]+") && maybeTime.length() <= 2 && maybeNumber.matches("[0-9]+") && maybeNumber.length() == 1) {
+            int time = Integer.parseInt(maybeTime);
+            int theatreNumber = Integer.parseInt(maybeNumber);
+            schedule.addScreening(name, theatreNumber, time);
+            System.out.println("\nSucessfully added a show to the schedule.\n");
+        } else { System.out.println("\nERROR adding show. invalid input.\n"); }
+    }
 
+    private void inspect(Screening screening) {
+        // in der Show drin
+        boolean inspectingShow = true;
+        System.out.println("\n" + screening.getName() +" @ " + screening.getTime() + ":00");
+        System.out.println("type \"back\" to go back to the main menu\ntype \"show\" to show aviable seats\ntype \"book\" to go to the booking menu \n");
+        while (!finished && inspectingShow) {
+            String input = getInput();
+            switch (input) {
+                case "back":
+                inspectingShow = false;
+                printMenu();
+                break;
+                case "show":
+                screening.getSeatStatus();
+                break;
+                case "book":
+                book(screening);
+                break;
+            }
+        }
+    }
+
+    private void book(Screening screening) {
+        boolean booking = true;
+        System.out.println("Booking menu: \n");
+        System.out.println("type \"new\" to create a new booking, \"edit\" to edit a booking");
+        System.out.println("type \"show bookings\" see all bookings");
+        System.out.println("type \"delete\" to delete a booking");
+        System.out.println("type \"back\" when you're finished\n");
+        while (!finished && booking) {
+            String input = getInput();
+            switch (input) {
+                case "back":
+                booking = false;
+                break;
+                case "show bookings":
+                screening.showBookings();
+                break;
+                case "new":
+                newBooking(screening);
+                break;
+                case "edit":
+                editBooking(screening);
+                break;
+                case "delete":
+                deleteBooking(screening);
+                break;
+            }
+        }
+    }
+
+    private void newBooking(Screening screening) {
+        System.out.println("Please enter your name:");
+        String name = reader.next();
+        System.out.println("Please enter your telephone number:");
+        String telephoneNumber = reader.next();
+        screening.createBooking(name, telephoneNumber);
+        System.out.println("Successfully created booking!");
+        // beim Erstellen eines Bookings wird man automatisch zu der Bearbeitung des Bookings weitergeleitet 
+    }
+
+    private void editBooking(Screening screening) {
+        System.out.println("Please enter the name of customer assigned to the booking:");
+        String name = reader.next();
+        if (screening.bookingEditable(name)) {
+            // edit booking
+            System.out.println("What do you want to edit? type \"add\" to add seat, type \"delete\" to delete seat, \"back\" to go back");
+            boolean bookingIsEdited =true;
+            Booking inspectedBooking =  screening.getBooking(name);
+            while (bookingIsEdited) {
+                String input = getInput();
+                if (input.equals("back")) {      
+                    System.out.println("Booking menu: \n");
+                    System.out.println("type \"new\" to create a new booking, \"edit\" to edit a booking");
+                    System.out.println("type \"show bookings\" see all bookings");
+                    System.out.println("or \"delete\" to delete a booking - type \"back\" to go back to inspection menu");
+                    bookingIsEdited = false;
+                }
+                if (input.equals("add")) {
+                    System.out.println("Please enter the row of the seat");
+                    int row = reader.nextInt();
+                    System.out.println("Please enter the number of the seat");
+                    int number = reader.nextInt();
+                    inspectedBooking.bookSeat(row, number);
+                    System.out.println("Seat reservation sucessfully added to reservation");
+                }
+                if (input.equals("delete")) {
+                    System.out.println("Please enter the row of the seat");
+                    int row = reader.nextInt();
+                    System.out.println("Please enter the number of the seat");
+                    int number = reader.nextInt();
+                    inspectedBooking.unbookSeat(row, number);
+                    System.out.println("Seat reservation sucessfully deleted from reservation");
+                }
+            }
+        }
+    }
+
+    private void deleteBooking(Screening screening) {
+        //ask for the name of the customer, so we can find the right booking to delete
+        System.out.println("Please enter the name of customer assigned to the booking");
+        String name = reader.next();
+        screening.deleteBooking(name);
     }
 
     public String getInput() {
         System.out.print("> ");                     // print prompt
-        return reader.nextLine().toLowerCase();     // gibt die komplete line aus
-
-        //return reader.nextLine().trim().toLowerCase();  - old one
+        String input = reader.nextLine().toLowerCase();
+        if (input.equals("quit")) { finished = true; }
+        return input;
+        //return reader.nextLine().toLowerCase();     // gibt die komplete Line aus
     }
 
     public void addCustomer(String name, String telephoneNumber) {
         customer = new Customer(name, telephoneNumber);
     }
 
-    private void userInterface(){
+    private void userInterface() {
 
     }
 }

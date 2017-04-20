@@ -3,25 +3,28 @@ import java.util.HashSet;
  * der Stundeplan fürs Kino, funktioniert erstmal nur für einen Tag und ohne auf die Zeit richtig zu achten
  */
 class Schedule {
-
     HashSet<Screening> showsOnCurrentDay;
-    //gibt jedem Screening automatisch beim erstellen eine nummer, sodass sie einfach unterscheidbar sind
+    // gibt jedem Screening automatisch beim Erstellen eine Nummer, sodass sie einfach unterscheidbar sind
     private int screeningNumber; 
 
     public Schedule() {
         showsOnCurrentDay = new HashSet<Screening>();
         screeningNumber = 0;
+        
+        addScreening("Good Fellas", 1, 1);
+        addScreening("Pulp Fiction", 1, 3);
+        addScreening("Fargo", 1, 5);
     }
 
     public void addScreening(String name, int theatreNumber, int time) {
-        screeningNumber++;        
+        screeningNumber++;
         showsOnCurrentDay.add(new Screening(screeningNumber, name, theatreNumber, time));    
     }
 
     public void showCurrentDay() {
-        String result = "screenings today: \n \n";
+        String result = "Today: \n\n";
         for (Screening screening: showsOnCurrentDay) {
-            result += screening.getTime()  + ": " + "Screening.no."+ screening.getNumber() + " - " + screening.getName() + " in theatre no." + screening.getTheatreNumber() + "\n";
+            result += "Screening " + screening.getNumber() + ":   " + screening.getTime() + ":00 – " + screening.getName() + " – theatre " + screening.getTheatreNumber() + "\n";
         }
         System.out.println(result);
     }
@@ -29,7 +32,7 @@ class Schedule {
     /*
      * Methode für das Booking System um das richtige Screening zu finden CHECK-Methode
      */
-    public  boolean isThereThisScreeningNumber(int number) {
+    public  boolean screeningExists(int number) {
         for (Screening screening : showsOnCurrentDay) {
             if (screening.getNumber() == number) {
                 return true;
@@ -38,12 +41,16 @@ class Schedule {
         return false;
     }
 
-    public Screening getScreeningByNumber(int number) {
+    public Screening getScreening(int number) {
         for (Screening screening : showsOnCurrentDay) {
             if (screening.getNumber() == number) {
                 return screening;
             }
         }
         return null;
+    }
+    
+    public int getTotalNumberOfScreenings() {
+        return showsOnCurrentDay.size();
     }
 }
