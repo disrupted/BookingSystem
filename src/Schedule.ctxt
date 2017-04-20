@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Schedule
-comment0.text=\r\n\ der\ Stundeplan\ f\u00FCrs\ Kino,\ funktioniert\ erstmal\ nur\ f\u00FCr\ einen\ Tag\ und\ ohne\ auf\ die\ Zeit\ richtig\ zu\ achten\r\n
+comment0.text=\n\ der\ Stundeplan\ f\u00FCrs\ Kino,\ funktioniert\ erstmal\ nur\ f\u00FCr\ einen\ Tag\ und\ ohne\ auf\ die\ Zeit\ richtig\ zu\ achten\n
 comment1.params=
 comment1.target=Schedule()
 comment2.params=name\ theatreNumber\ time
@@ -9,7 +9,7 @@ comment3.params=
 comment3.target=void\ showCurrentDay()
 comment4.params=number
 comment4.target=boolean\ isThereThisScreeningNumber(int)
-comment4.text=\r\n\ Methode\ f\u00FCr\ das\ Booking\ System\ um\ das\ richtige\ Screening\ zu\ finden\ CHECK-Methode\r\n
+comment4.text=\n\ Methode\ f\u00FCr\ das\ Booking\ System\ um\ das\ richtige\ Screening\ zu\ finden\ CHECK-Methode\n
 comment5.params=number
 comment5.target=Screening\ getScreeningByNumber(int)
 numComments=6

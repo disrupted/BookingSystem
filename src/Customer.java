@@ -7,12 +7,12 @@ public class Customer
         this.name = name;
         this.telephoneNumber = telephoneNumber;
     }
-    
+
     public String getName()
     {
         return name;
     }
-    
+
     public String getTelephoneNumber()
     {
         return telephoneNumber;

@@ -27,23 +27,23 @@ public class Screening {
     /*
      * Methods for the schedule-class
      */
-    public int getNumber(){
+    public int getNumber() {
         return number;
     } 
 
-    public int getTime(){
+    public int getTime() {
         return time;
     }    
 
-    public void getDate(){
+    public void getDate() {
         // return Date  not yet implemented
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }    
 
-    public int getTheatreNumber(){
+    public int getTheatreNumber() {
         return theatreNumber;
     }
 
@@ -72,17 +72,16 @@ public class Screening {
      * 
      * @param Name und Telefonnummer des Kunden - siehe Customer-Klasse
      */
-    public void createBooking(String name, String telephoneNumber){
+    public void createBooking(String name, String telephoneNumber) {
         myBookings.add(new Booking(new Customer(name,telephoneNumber)));
-       
-       
+
     }
 
-    public void deleteBooking(String name){
+    public void deleteBooking(String name) {
         Iterator<Booking> bi = myBookings.iterator();
-        while(bi.hasNext()){
+        while (bi.hasNext()) {
             Booking currentBooking = bi.next();
-            if(currentBooking.getCustomer().getName().equals(name)){
+            if (currentBooking.getCustomer().getName().equals(name)) {
                 myBookings.remove(currentBooking);
                 System.out.println("deleted sucessfully");
                 return;
@@ -90,28 +89,27 @@ public class Screening {
         }
         System.out.println("Error - could not delete");
     }
-   
+
     /*
      * returns a Booking from the screening-HashSet Collection of Bookings
      */
-    public Booking getBooking(String name){
-        for(Booking booking: myBookings){
-            if(booking.getCustomer().getName().equals(name)){
+    public Booking getBooking(String name) {
+        for (Booking booking: myBookings) {
+            if (booking.getCustomer().getName().equals(name)) {
                 return booking;
             }
         }
         return null;
     }
-    
 
     /*
      * checkt ob das Booking vorhanden ist - eig redundadnt?
      */
-    public boolean bookingEditable(String name){
+    public boolean bookingEditable(String name) {
         Booking editableBooking;
         boolean bookingFound = false;
-        for(Booking booking: myBookings){
-            if(booking.getCustomer().getName().equals(name)){
+        for (Booking booking: myBookings) {
+            if (booking.getCustomer().getName().equals(name)) {
                 editableBooking = booking;
                 bookingFound = true;
                 return true;
@@ -120,23 +118,23 @@ public class Screening {
         //*CHECK* falls ein falscher Name des Booking-Customers eingegeben wurde
         System.out.println("cant edit, because there is no such booking");
         return false;
-        
+
     }
 
     /*
      * Übersicht über Buchungen - zeigt alle Buchungen nach Namen und dazugehörigen gebuchten Plätzen
      */
-    public void showBookings(){
+    public void showBookings() {
         // jedesmal wenn diese methode aufgerufen wird, wird der Status der seats upgedatet:
         updateSeats();
         String result = "";
-        if(myBookings.size()>0){
+        if (myBookings.size() > 0) {
             result += "bookings for " + name + ":" + "\n"+ "\n";
-            for(Booking booking: myBookings){
+            for (Booking booking: myBookings) {
                 result += booking.getCustomer().getName() + ":\n";
                 result += booking.showBookedSeats() + "\n" + "\n";
             }   
-        }else{
+        } else {
             result += "there are no bookings for " + name;
         }
         System.out.println(result);
@@ -145,24 +143,24 @@ public class Screening {
     /*
      * dies updated die Anfragen von Sitzplätzen von den Bookings und den Theaterplätzen, sodass die Methode getSeatStatus immer aktuell ist
      */
-    private void updateSeats(){
+    private void updateSeats() {
         HashSet<Seat> theatreSeats = myTheatre.getSeats();
         //löscht alle Plätze von dem Theater - dies sorgt dafür, dass vom Booking entfernte Plätze nicht besetzt bleiben
-        for(Seat theatreSeat : theatreSeats){
-                   theatreSeat.bookedFalse();    
+        for (Seat theatreSeat : theatreSeats) {
+            theatreSeat.bookedFalse();    
         }         
-        for(Booking booking: myBookings){
-                HashSet<Seat> usedSeats = booking.getBookedSeats();
-                
-                //geht das Theater durch und reserviert die in den bookings eingetragenen Plätze
-                for(Seat seat : usedSeats){
-                    for(Seat theatreSeat : theatreSeats){
-                        if(seat.getRow() == theatreSeat.getRow() && seat.getNumber() == theatreSeat.getNumber()){
-                            theatreSeat.changeStatus();
-                        }
+        for (Booking booking: myBookings) {
+            HashSet<Seat> usedSeats = booking.getBookedSeats();
+
+            //geht das Theatre durch und reserviert die in den Bookings eingetragenen Plätze
+            for (Seat seat : usedSeats) {
+                for (Seat theatreSeat : theatreSeats) {
+                    if ((seat.getRow() == theatreSeat.getRow()) && (seat.getNumber() == theatreSeat.getNumber())) {
+                        theatreSeat.changeStatus();
                     }
                 }
-            }   
+            }
+        }   
     }
 }
 

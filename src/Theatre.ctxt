@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Theatre
-comment0.text=\r\n\ This\ class\ is\ a\ blueprint\ for\ all\ the\ differnt\ theaters\ of\ a\ cinema.\ With\ the\ following\ Methods\r\n\ every\ subclass,\ which\ are\ representing\ the\ specific\ theaters\ can\ be\ converted\ to\ an\ invidual\ theater\ within\ a\ few\ lines.\r\n
+comment0.text=\n\ This\ class\ is\ a\ blueprint\ for\ all\ the\ differnt\ theaters\ of\ a\ cinema.\ With\ the\ following\ Methods\n\ every\ subclass,\ which\ are\ representing\ the\ specific\ theaters\ can\ be\ converted\ to\ an\ invidual\ theater\ within\ a\ few\ lines.\n
 comment1.params=
 comment1.target=Theatre()
 comment2.params=rowLength

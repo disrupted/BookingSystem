@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=BookingSystem
-comment0.text=\r\n\ Interface\ between\ the\ user\ and\ the\ programm,\ starts\ the\ programm\ with\ the\ main\ method\ and\ prints\ questions\ and\ status\ of\ the\ programm\ -\ like\ in\ the\ zuul\ game\r\n\ a\ bit\ messy\ so\ far\r\n
+comment0.text=\n\ Interface\ between\ the\ user\ and\ the\ programm,\ starts\ the\ programm\ with\ the\ main\ method\ and\ prints\ questions\ and\ status\ of\ the\ programm\ -\ like\ in\ the\ zuul\ game\n\ a\ bit\ messy\ so\ far\n
 comment1.params=
 comment1.target=BookingSystem()
 comment2.params=args
@@ -11,7 +11,7 @@ comment4.params=
 comment4.target=void\ printGoodbye()
 comment5.params=
 comment5.target=void\ start()
-comment5.text=\r\n\ im\ zuul-style\ implementiert\r\n
+comment5.text=\n\ im\ zuul-style\ implementiert\n
 comment6.params=name\ currentInspectedScreening
 comment6.target=void\ editBooking(java.lang.String,\ Screening)
 comment7.params=

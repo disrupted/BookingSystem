@@ -28,7 +28,7 @@ public class Theatre {
         return seats.size();
     }
 
-    public HashSet getSeats(){
+    public HashSet getSeats() {
         return seats;
     }
 
@@ -37,33 +37,19 @@ public class Theatre {
         boolean lastRow = false;
         int currentRow = 1;
         HashSet<Seat> currentRowSeats = new HashSet<Seat>();
-        while(!lastRow){
+        while (!lastRow) {
             for (Seat seat : seats) {
-                if(seat.getRow()==currentRow){
+                if (seat.getRow() == currentRow) {
                     String status = "";
                     if (seat.isBooked()) status = "booked"; else status = "free";    
                     result += "row: " + seat.getRow() + " - number: " + seat.getNumber() + " - " + status + "\n";
                     currentRowSeats.add(seat);
                 }
             }
-            if(currentRowSeats.size()<1){ lastRow = true;}
+            if (currentRowSeats.size() < 1) { lastRow = true; }
             currentRowSeats.clear();
             currentRow++;
         }
         return result;
     }
-    
-    /*
-     * old method, seats are not sorted but easier to understand
-     
-      public String getSeatStatus() {
-        String result = "";
-        for (Seat seat : seats) {
-            String status = "";
-            if (seat.isBooked()) status = "booked"; else status = "free";    
-            result += "row: " + seat.getRow() + " - number: " + seat.getNumber() + " - " + status + "\n";
-        }
-        return result;
-    }
-    */
 }

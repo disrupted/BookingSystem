@@ -5,7 +5,7 @@
  * Responsibilities: The seat object knows its row and number and know if it is booked or not,
  * also it can be booked or unbooked via the changeStatus() Method
  */
- public class Seat {
+public class Seat {
     private int row, number;
     private boolean booked = false;
 
@@ -13,23 +13,23 @@
         this.row = rowNumber;
         this.number = seatNumber;
     }
-    
+
     public int getRow() {
         return row;
     }
-    
+
     public int getNumber() {
         return number;
     }
-    
+
     public boolean isBooked() {
         return booked;
     }
-    
+
     public void changeStatus() {
         booked = !booked;
     }
-    
+
     public void bookedFalse(){
         booked = false;
     }

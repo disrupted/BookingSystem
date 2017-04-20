@@ -18,12 +18,10 @@ class Schedule {
         showsOnCurrentDay.add(new Screening(screeningNumber, name, theatreNumber, time));    
     }
 
-    public void showCurrentDay(){
+    public void showCurrentDay() {
         String result = "screenings today: \n \n";
-        {
-            for(Screening screening: showsOnCurrentDay){
-                result += screening.getTime()  + ": " + "Screening.no."+ screening.getNumber() + " - " + screening.getName() + " in theatre no." + screening.getTheatreNumber() + "\n";
-            }
+        for (Screening screening: showsOnCurrentDay) {
+            result += screening.getTime()  + ": " + "Screening.no."+ screening.getNumber() + " - " + screening.getName() + " in theatre no." + screening.getTheatreNumber() + "\n";
         }
         System.out.println(result);
     }
@@ -31,18 +29,18 @@ class Schedule {
     /*
      * Methode für das Booking System um das richtige Screening zu finden CHECK-Methode
      */
-    public  boolean isThereThisScreeningNumber(int number){
-        for(Screening screening : showsOnCurrentDay){
-            if(screening.getNumber() == number){
+    public  boolean isThereThisScreeningNumber(int number) {
+        for (Screening screening : showsOnCurrentDay) {
+            if (screening.getNumber() == number) {
                 return true;
             }
         }
         return false;
     }
 
-    public Screening getScreeningByNumber(int number){
-        for(Screening screening : showsOnCurrentDay){
-            if(screening.getNumber() == number){
+    public Screening getScreeningByNumber(int number) {
+        for (Screening screening : showsOnCurrentDay) {
+            if (screening.getNumber() == number) {
                 return screening;
             }
         }

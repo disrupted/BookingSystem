@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Seat
-comment0.text=\r\n\ Object\ of\ this\ class\ are\ representing\ a\ seat\ throughout\ a\ screening\ \r\n\ (the\ same\ "real"\ seat\ is\ represented\ by\ a\ different\ instance\ on\ two\ different\ screenings\ in\ this\ programm)\r\n\ \r\n\ Responsibilities\:\ The\ seat\ object\ knows\ its\ row\ and\ number\ and\ know\ if\ it\ is\ booked\ or\ not,\r\n\ also\ it\ can\ be\ booked\ or\ unbooked\ via\ the\ changeStatus()\ Method\r\n
+comment0.text=\n\ Object\ of\ this\ class\ are\ representing\ a\ seat\ throughout\ a\ screening\ \n\ (the\ same\ "real"\ seat\ is\ represented\ by\ a\ different\ instance\ on\ two\ different\ screenings\ in\ this\ programm)\n\ \n\ Responsibilities\:\ The\ seat\ object\ knows\ its\ row\ and\ number\ and\ know\ if\ it\ is\ booked\ or\ not,\n\ also\ it\ can\ be\ booked\ or\ unbooked\ via\ the\ changeStatus()\ Method\n
 comment1.params=rowNumber\ seatNumber
 comment1.target=Seat(int,\ int)
 comment2.params=
