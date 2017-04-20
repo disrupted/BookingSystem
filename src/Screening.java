@@ -29,10 +29,16 @@ public class Screening {
      */
     public int getNumber() {
         return number;
-    } 
-
+    }
+    
     public int getTime() {
         return time;
+    }
+
+    public String getTimeString() {
+        String zero = "";
+        if (time < 10) { zero += "0"; }
+        return zero + time + ":00";
     }    
 
     public void getDate() {
@@ -45,6 +51,10 @@ public class Screening {
 
     public int getTheatreNumber() {
         return theatreNumber;
+    }
+    
+    public String getDetails() {
+        return "#" + number + ":  " + getTimeString() + " – " + name + " – theatre " + theatreNumber;
     }
 
     /*

@@ -10,7 +10,7 @@ class Schedule {
     public Schedule() {
         showsOnCurrentDay = new HashSet<Screening>();
         screeningNumber = 0;
-        
+
         addScreening("Good Fellas", 1, 1);
         addScreening("Pulp Fiction", 1, 3);
         addScreening("Fargo", 1, 5);
@@ -23,8 +23,10 @@ class Schedule {
 
     public void showCurrentDay() {
         String result = "Today: \n\n";
+        String indent = "                  "; // 20 spaces.
         for (Screening screening: showsOnCurrentDay) {
-            result += "Screening " + screening.getNumber() + ":   " + screening.getTime() + ":00 – " + screening.getName() + " – theatre " + screening.getTheatreNumber() + "\n";
+            String space = indent.substring(0, 20 - screening.getName().length());
+            result += "#" + screening.getNumber() + ":  " + screening.getTimeString() + " – " + screening.getName() + space + " – theatre " + screening.getTheatreNumber() + "\n";
         }
         System.out.println(result);
     }
@@ -49,7 +51,7 @@ class Schedule {
         }
         return null;
     }
-    
+
     public int getTotalNumberOfScreenings() {
         return showsOnCurrentDay.size();
     }
