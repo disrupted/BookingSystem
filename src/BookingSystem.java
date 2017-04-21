@@ -212,4 +212,10 @@ public class BookingSystem {
     private void userInterface() {
 
     }
+    
+    /*
+     * This is a testComment to make a testRun of git commiting/pushing.
+     * 
+     * /
+     */
 }
