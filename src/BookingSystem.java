@@ -95,7 +95,7 @@ public class BookingSystem {
     private void inspect(Screening screening) {
         // in der Show drin
         boolean inspectingShow = true;
-        System.out.println("\n" + screening.getName() +" @ " + screening.getTime() + ":00");
+        System.out.println("\n" + screening.getName() +" @ " + screening.getTimeString());
         System.out.println("type \"back\" to go back to the main menu\ntype \"show\" to show aviable seats\ntype \"book\" to go to the booking menu \n");
         while (!finished && inspectingShow) {
             String input = getInput();
@@ -163,7 +163,7 @@ public class BookingSystem {
             Booking inspectedBooking =  screening.getBooking(name);
             while (bookingIsEdited) {
                 String input = getInput();
-                if (input.equals("back")) {      
+                if (input.equals("back")) {
                     System.out.println("Booking menu: \n");
                     System.out.println("type \"new\" to create a new booking, \"edit\" to edit a booking");
                     System.out.println("type \"show bookings\" see all bookings");

@@ -26,7 +26,7 @@ class Schedule {
         String indent = "                  "; // 20 spaces.
         for (Screening screening: showsOnCurrentDay) {
             String space = indent.substring(0, 20 - screening.getName().length());
-            result += "#" + screening.getNumber() + ":  " + screening.getTimeString() + " – " + screening.getName() + space + " – theatre " + screening.getTheatreNumber() + "\n";
+            result += "#" + screening.getNumber() + ":  " + screening.getTimeString() + " – " + screening.getName() + space + " → theatre " + screening.getTheatreNumber() + "\n";
         }
         System.out.println(result);
     }
