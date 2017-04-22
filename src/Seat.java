@@ -33,4 +33,13 @@ public class Seat {
     public void bookedFalse(){
         booked = false;
     }
+    
+    public boolean book() {
+        if (!booked) { 
+            changeStatus();
+            return booked; // returns true if booking was successful
+        } else {
+            return false;
+        }
+    }
 }

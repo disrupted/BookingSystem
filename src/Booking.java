@@ -10,21 +10,21 @@ public class Booking {
     /*
      * fügt einen gewünschten Sitzlatz zur Buchung hinze
      */
-    public void bookSeat(int row, int seatNumber) {
-        boolean alreadyBooked = false;
-        for (Seat seat: bookedSeats){
-            if ((seat.getRow() == row) && (seat.getNumber() == seatNumber)) {
-                alreadyBooked = true;
+    public void bookSeat(Theatre myTheatre, int row, int seatNumber) {
+        Seat seat = myTheatre.getSeat(row, seatNumber);
+        if (seat != null) {
+            if (seat.book()) {
+                bookedSeats.add(seat);
+                System.out.println("Seat reservation sucessfully added to reservation");
+            } else {
+                System.out.println("ERROR: Seat " + row + "-" + seatNumber + " is not available for booking");
             }
-        }
-        if (alreadyBooked) {
-            System.out.println("You already booked this seat");
-        } else {
-            bookedSeats.add(new Seat(row, seatNumber));
-        }
+        } else { System.out.println("ERROR: Seat " + row + "-" + seatNumber + " doesn't exist"); }
     }
 
-    //bookAdjoinedSeats()  kommt vllcht später
+    public void bookAdjoinedSeat() {
+
+    }
 
     /*
      * löscht eine ngewünschten Sitzplatz von der Buchung
@@ -39,7 +39,7 @@ public class Booking {
     }
 
     /*
-     * zeigt alle gewünschten plätze dieser Buchung - wird vom Screening weiterbenutzt
+     * zeigt alle gewünschten Plätze dieser Buchung - wird vom Screening weiterbenutzt
      */
     public String showBookedSeats() {
         String result = "";

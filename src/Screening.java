@@ -48,7 +48,11 @@ public class Screening {
 
     public String getName() {
         return name;
-    }    
+    }
+    
+    public Theatre getTheatre() {
+        return myTheatre;
+    }
 
     public int getTheatreNumber() {
         return theatreNumber;

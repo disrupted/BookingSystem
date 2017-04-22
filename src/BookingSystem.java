@@ -159,7 +159,7 @@ public class BookingSystem {
         if (screening.bookingEditable(name)) {
             // edit booking
             System.out.println("What do you want to edit? type \"add\" to add seat, type \"delete\" to delete seat, \"back\" to go back");
-            boolean bookingIsEdited =true;
+            boolean bookingIsEdited = true;
             Booking inspectedBooking =  screening.getBooking(name);
             while (bookingIsEdited) {
                 String input = getInput();
@@ -171,12 +171,12 @@ public class BookingSystem {
                     bookingIsEdited = false;
                 }
                 if (input.equals("add")) {
+                    screening.getSeatStatus();
                     System.out.println("Please enter the row of the seat");
                     int row = reader.nextInt();
                     System.out.println("Please enter the number of the seat");
                     int number = reader.nextInt();
-                    inspectedBooking.bookSeat(row, number);
-                    System.out.println("Seat reservation sucessfully added to reservation");
+                    inspectedBooking.bookSeat(screening.getTheatre(), row, number);
                 }
                 if (input.equals("delete")) {
                     System.out.println("Please enter the row of the seat");

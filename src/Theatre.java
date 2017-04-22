@@ -27,6 +27,15 @@ public class Theatre {
     public int getNumberOfSeats() {
         return seats.size();
     }
+    
+    public Seat getSeat(int row, int seatNumber) {
+        for (Seat seat: seats) {
+            if ((seat.getRow() == row) && (seat.getNumber() == seatNumber)) {
+                return seat;
+            }
+        }
+        return null;
+    }
 
     public ArrayList getSeats() {
         return seats;
