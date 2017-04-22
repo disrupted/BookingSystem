@@ -1,13 +1,14 @@
-- BookingSystem Classe säubern , schöner machen
+
 - Preis implementieren, vllcht Klasse zum Tickets drucken?
 - bookAdjoined seats Methode
+- benutzerfreubdlicher machen
 
 Kleinens anforderungen:
 
 2
-- book n neighbouring seats
-- calculate total price
+- book n neighbouring seats Salonon
+- calculate total price  Martin 
 
-3. did we used all classes? how did we tesst the system?  Ja und nein :)
+3. did we used all classes? how did we tesst the system?  Ja und nein :)   
 
-4. bring the project to eclipse and store it in 2 packages, make a Unit Test
+4. bring the project to eclipse and store it in 2 packages, make a Unit Test  Salomon
