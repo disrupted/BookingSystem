@@ -1,19 +1,20 @@
-import java.util.HashSet;
+import java.util.ArrayList;
 /*
  * der Stundeplan fürs Kino, funktioniert erstmal nur für einen Tag und ohne auf die Zeit richtig zu achten
  */
 class Schedule {
-    HashSet<Screening> showsOnCurrentDay;
+    ArrayList<Screening> showsOnCurrentDay;
     // gibt jedem Screening automatisch beim Erstellen eine Nummer, sodass sie einfach unterscheidbar sind
     private int screeningNumber; 
 
     public Schedule() {
-        showsOnCurrentDay = new HashSet<Screening>();
+        showsOnCurrentDay = new ArrayList<Screening>();
         screeningNumber = 0;
 
         addScreening("Good Fellas", 1, 1);
         addScreening("Pulp Fiction", 1, 3);
         addScreening("Fargo", 1, 5);
+        addScreening("Léon", 2, 5);
     }
 
     public void addScreening(String name, int theatreNumber, int time) {
