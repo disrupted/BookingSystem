@@ -1,15 +1,15 @@
-import java.util.HashSet;
+import java.util.ArrayList;
 /**
  * This class is a blueprint for all the differnt theaters of a cinema. With the following Methods
  * every subclass, which are representing the specific theaters can be converted to an invidual theater within a few lines.
  */
 public class Theatre {
-    private HashSet<Seat> seats;
+    private ArrayList<Seat> seats;
     protected int rowNumber = 0;
     protected String name;
 
     public Theatre() {
-        seats = new HashSet<Seat>();
+        seats = new ArrayList<Seat>();
     }
 
     public void addSeatRow(int rowLength) {
@@ -28,28 +28,20 @@ public class Theatre {
         return seats.size();
     }
 
-    public HashSet getSeats() {
+    public ArrayList getSeats() {
         return seats;
     }
 
     public String getSeatStatus() {
-        String result = "";
-        boolean lastRow = false;
-        int currentRow = 1;
-        HashSet<Seat> currentRowSeats = new HashSet<Seat>();
-        while (!lastRow) {
-            for (Seat seat : seats) {
-                if (seat.getRow() == currentRow) {
-                    String status = "";
-                    if (seat.isBooked()) status = "booked"; else status = "free";    
-                    result += "row: " + seat.getRow() + " - number: " + seat.getNumber() + " - " + status + "\n";
-                    currentRowSeats.add(seat);
+        String result = "\n rows  |   seats\n–––––––––––––––––––––––––––––";
+        for (int currentRow = 1; currentRow <= seats.get(seats.size() - 1).getRow(); currentRow++) { // for each row of seats
+            result += "\n  #" + currentRow + "   |  ";
+            for (int i = 0; i < seats.size(); i++) {
+                if (seats.get(i).getRow() == currentRow) {
+                    if (seats.get(i).isBooked()) result += " X "; else result += " " + seats.get(i).getNumber() + " ";
                 }
             }
-            if (currentRowSeats.size() < 1) { lastRow = true; }
-            currentRowSeats.clear();
-            currentRow++;
         }
-        return result;
+        return result + "\n";
     }
 }

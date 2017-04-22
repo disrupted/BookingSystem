@@ -1,5 +1,6 @@
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.ArrayList;
 /**
  * Instances of this class are representing one specific show in the cinema, 
  * (the same movie on a different day or time is also a different show)
@@ -160,7 +161,7 @@ public class Screening {
      * dies updated die Anfragen von Sitzplätzen von den Bookings und den Theaterplätzen, sodass die Methode getSeatStatus immer aktuell ist
      */
     private void updateSeats() {
-        HashSet<Seat> theatreSeats = myTheatre.getSeats();
+        ArrayList<Seat> theatreSeats = myTheatre.getSeats();
         //löscht alle Plätze von dem Theater - dies sorgt dafür, dass vom Booking entfernte Plätze nicht besetzt bleiben
         for (Seat theatreSeat : theatreSeats) {
             theatreSeat.bookedFalse();    
