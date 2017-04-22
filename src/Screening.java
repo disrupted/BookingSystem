@@ -124,25 +124,6 @@ public class Screening {
     }
 
     /*
-     * checkt ob das Booking vorhanden ist - eig redundadnt?
-     */
-    public boolean bookingEditable(String name) {
-        Booking editableBooking;
-        boolean bookingFound = false;
-        for (Booking booking: myBookings) {
-            if (booking.getCustomer().getName().equals(name)) {
-                editableBooking = booking;
-                bookingFound = true;
-                return true;
-            }
-        }
-        //*CHECK* falls ein falscher Name des Booking-Customers eingegeben wurde
-        System.out.println("cant edit, because there is no such booking");
-        return false;
-
-    }
-
-    /*
      * Übersicht über Buchungen – zeigt alle Buchungen nach Namen und dazugehörigen gebuchten Plätzen
      */
     public void showBookings() {
@@ -150,7 +131,7 @@ public class Screening {
         if (myBookings.size() > 0) {
             result += "Bookings for \"" + name + "\":";
             for (Booking booking: myBookings) {
-                result += "\n\n" + booking.getCustomer().getName() + ":\n" + booking.showBookedSeats();
+                result += "\n\n" + booking.getCustomer().getName() + ":" + booking.showBookedSeats();
             }   
         } else {
             result += "There aren't any bookings for \"" + name + "\" yet.";

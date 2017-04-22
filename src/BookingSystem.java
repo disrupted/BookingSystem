@@ -156,7 +156,7 @@ public class BookingSystem {
     private void editBooking(Screening screening) {
         System.out.println("Please enter the name of customer assigned to the booking:");
         String name = reader.next();
-        if (screening.bookingEditable(name)) {
+        if (screening.getBooking(name) != null) {
             // edit booking
             System.out.println("What do you want to edit?\ntype \"add\" to add seat\ntype \"delete\" to delete seat\ntype \"back\" to go back");
             boolean bookingIsEdited = true;
@@ -171,12 +171,7 @@ public class BookingSystem {
                     bookingIsEdited = false;
                 }
                 if (input.equals("add")) {
-                    screening.getSeatStatus();
-                    System.out.println("Please enter the row of the seat");
-                    int row = reader.nextInt();
-                    System.out.println("Please enter the number of the seat");
-                    int number = reader.nextInt();
-                    inspectedBooking.bookSeat(screening.getTheatre(), row, number);
+                    addSeat(screening, inspectedBooking);
                 }
                 if (input.equals("delete")) {
                     System.out.println("Please enter the row of the seat");
@@ -187,7 +182,18 @@ public class BookingSystem {
                     System.out.println("Seat reservation sucessfully deleted from reservation");
                 }
             }
+        } else {
+            System.out.println("ERROR: requested Booking doesn't exist.");
         }
+    }
+
+    private void addSeat(Screening screening, Booking inspectedBooking) {
+        screening.getSeatStatus();
+        System.out.println("Please enter the row of the seat");
+        int row = reader.nextInt();
+        System.out.println("Please enter the number of the seat");
+        int number = reader.nextInt();
+        inspectedBooking.bookSeat(screening.getTheatre(), row, number);
     }
 
     private void deleteBooking(Screening screening) {
@@ -212,9 +218,4 @@ public class BookingSystem {
     private void userInterface() {
 
     }
-    
-    /*
-     * testing switching the branch
-     * 
-     */
 }
