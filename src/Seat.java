@@ -29,15 +29,20 @@ public class Seat {
     public void changeStatus() {
         booked = !booked;
     }
-
-    public void bookedFalse(){
-        booked = false;
-    }
     
     public boolean book() {
         if (!booked) { 
             changeStatus();
             return booked; // returns true if booking was successful
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean unbook() {
+        if (booked) { 
+            changeStatus();
+            return !booked; // returns true if unbooking was successful
         } else {
             return false;
         }

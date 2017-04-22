@@ -143,45 +143,19 @@ public class Screening {
     }
 
     /*
-     * Übersicht über Buchungen - zeigt alle Buchungen nach Namen und dazugehörigen gebuchten Plätzen
+     * Übersicht über Buchungen – zeigt alle Buchungen nach Namen und dazugehörigen gebuchten Plätzen
      */
     public void showBookings() {
-        // jedesmal wenn diese methode aufgerufen wird, wird der Status der seats upgedatet:
-        updateSeats();
         String result = "";
         if (myBookings.size() > 0) {
-            result += "bookings for " + name + ":" + "\n"+ "\n";
+            result += "Bookings for \"" + name + "\":";
             for (Booking booking: myBookings) {
-                result += booking.getCustomer().getName() + ":\n";
-                result += booking.showBookedSeats() + "\n" + "\n";
+                result += "\n\n" + booking.getCustomer().getName() + ":\n" + booking.showBookedSeats();
             }   
         } else {
-            result += "there are no bookings for " + name;
+            result += "There aren't any bookings for \"" + name + "\" yet.";
         }
-        System.out.println(result);
-    }
-
-    /*
-     * dies updated die Anfragen von Sitzplätzen von den Bookings und den Theaterplätzen, sodass die Methode getSeatStatus immer aktuell ist
-     */
-    private void updateSeats() {
-        ArrayList<Seat> theatreSeats = myTheatre.getSeats();
-        //löscht alle Plätze von dem Theater - dies sorgt dafür, dass vom Booking entfernte Plätze nicht besetzt bleiben
-        for (Seat theatreSeat : theatreSeats) {
-            theatreSeat.bookedFalse();    
-        }         
-        for (Booking booking: myBookings) {
-            HashSet<Seat> usedSeats = booking.getBookedSeats();
-
-            //geht das Theatre durch und reserviert die in den Bookings eingetragenen Plätze
-            for (Seat seat : usedSeats) {
-                for (Seat theatreSeat : theatreSeats) {
-                    if ((seat.getRow() == theatreSeat.getRow()) && (seat.getNumber() == theatreSeat.getNumber())) {
-                        theatreSeat.changeStatus();
-                    }
-                }
-            }
-        }   
+        System.out.println(result + "\n");
     }
 }
 

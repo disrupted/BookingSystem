@@ -8,18 +8,20 @@ public class Booking {
     }
 
     /*
-     * fügt einen gewünschten Sitzlatz zur Buchung hinze
+     * fügt einen gewünschten Sitzlatz zur Buchung hinzu
      */
     public void bookSeat(Theatre myTheatre, int row, int seatNumber) {
         Seat seat = myTheatre.getSeat(row, seatNumber);
-        if (seat != null) {
+        try {
             if (seat.book()) {
                 bookedSeats.add(seat);
                 System.out.println("Seat reservation sucessfully added to reservation");
             } else {
                 System.out.println("ERROR: Seat " + row + "-" + seatNumber + " is not available for booking");
             }
-        } else { System.out.println("ERROR: Seat " + row + "-" + seatNumber + " doesn't exist"); }
+        } catch (NullPointerException e) {
+            System.out.println("ERROR: Seat " + row + "-" + seatNumber + " doesn't exist");
+        }
     }
 
     public void bookAdjoinedSeat() {
@@ -27,15 +29,20 @@ public class Booking {
     }
 
     /*
-     * löscht eine ngewünschten Sitzplatz von der Buchung
+     * löscht einen Sitzplatz von der Buchung
      */
-    public void unbookSeat(int row, int seatNumber) {
-        for (Seat seat: bookedSeats){
-            if ((seat.getRow() == row) && (seat.getNumber() == seatNumber)) {
+    public void unbookSeat(Theatre myTheatre, int row, int seatNumber) {
+        Seat seat = myTheatre.getSeat(row, seatNumber);
+        try {
+            if (seat.unbook()) {
                 bookedSeats.remove(seat);
+                System.out.println("Seat reservation cancelled");
+            } else {
+                System.out.println("ERROR: Seat " + row + "-" + seatNumber + " is not part of your booking.");
             }
+        } catch (NullPointerException e) {
+            System.out.println("ERROR: Seat " + row + "-" + seatNumber + " doesn't exist");
         }
-        System.out.println("there is no such seat booked");
     }
 
     /*
@@ -43,13 +50,13 @@ public class Booking {
      */
     public String showBookedSeats() {
         String result = "";
-        if (bookedSeats.size() <= 0) {
-            result += "there are no booked seats";
-        } else {
-            result += bookedSeats.size() + " booked seats: \n";
+        if (bookedSeats.size() > 0) {
+            result += bookedSeats.size() + " booked seat(s)";
             for (Seat seat: bookedSeats) {
-                result += "row: " + seat.getRow() + " number: " + seat.getNumber() + "\n";
+                result += "\n → row " + seat.getRow() + " – seat " + seat.getNumber();
             }
+        } else {
+            result += "\n none";
         }
         return result;
     }
