@@ -33,15 +33,24 @@ public class Theatre {
     }
 
     public String getSeatStatus() {
-        String result = "\n rows  |   seats\n–––––––––––––––––––––––––––––";
+        int totalBooked = 0; // counts the total number of booked seats in this theatre
+        String result = "\n#####  " + name + " seat map  #####\n###############################\n\n rows  |   seats\n–––––––––––––––––––––––––––––——";
         for (int currentRow = 1; currentRow <= seats.get(seats.size() - 1).getRow(); currentRow++) { // for each row of seats
             result += "\n  #" + currentRow + "   |  ";
             for (int i = 0; i < seats.size(); i++) {
                 if (seats.get(i).getRow() == currentRow) {
-                    if (seats.get(i).isBooked()) result += " X "; else result += " " + seats.get(i).getNumber() + " ";
+                    if (seats.get(i).isBooked()) {
+                        result += " X ";
+                        totalBooked++;
+                    } else {
+                        result += " " + seats.get(i).getNumber() + " ";
+                    }
                 }
             }
         }
+        if (totalBooked == 0) result += "\n\n→ ALL SEATS AVAILABLE";
+        else if (totalBooked == seats.size()) result += "\n\n→ COMPLETELY BOOKED OUT";
+        else result += "\n\n→ " + (seats.size() - totalBooked) + " REMAINING SEATS"; // prints number of remaining seats
         return result + "\n";
     }
 }
