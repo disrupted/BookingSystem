@@ -82,7 +82,7 @@ public class BookingSystem {
         String name = reader.next();
         System.out.println("Please enter the time of the screening: (0-23)");
         String maybeTime = reader.next();
-        System.out.println("Please enter the number of the theatre: (1-6)");
+        System.out.println("Please enter the number of the theatre: (1-2)");
         String maybeNumber = reader.next();    
         if (maybeTime.matches("[0-9]+") && maybeTime.length() <= 2 && maybeNumber.matches("[0-9]+") && maybeNumber.length() == 1) {
             int time = Integer.parseInt(maybeTime);

@@ -30,7 +30,7 @@ public class Screening {
     public int getNumber() {
         return number;
     }
-    
+
     public int getTime() {
         return time;
     }
@@ -52,7 +52,7 @@ public class Screening {
     public int getTheatreNumber() {
         return theatreNumber;
     }
-    
+
     public String getDetails() {
         return "#" + number + ":  " + getTimeString() + " – " + name + " – theatre " + theatreNumber;
     }
@@ -61,10 +61,16 @@ public class Screening {
      * erstellt das Theater in dem das Screening stattfindet
      */
     private void createTheatre() {
-        if (theatreNumber == 1) {
+        switch (theatreNumber) {
+            case 1:
             myTheatre = new Theatre1();
-        } else {
+            break;
+            case 2:
+            myTheatre = new Theatre2();
+            break;
+            default:
             System.out.println("No such theatre: " + theatreNumber);
+            break;
         }
     }
 

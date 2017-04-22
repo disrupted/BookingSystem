@@ -23,7 +23,7 @@ class Schedule {
     }
 
     public void showCurrentDay() {
-        String result = "Today: \n\n";
+        String result = "Today's Screenings: \n\n";
         String indent = "                  "; // 20 spaces.
         for (Screening screening: showsOnCurrentDay) {
             String space = indent.substring(0, 20 - screening.getName().length());
