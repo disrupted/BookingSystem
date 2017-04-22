@@ -1,25 +1,54 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 /*
- * der Stundeplan fürs Kino, funktioniert erstmal nur für einen Tag und ohne auf die Zeit richtig zu achten
+ * der Spielplan fürs Kino, funktioniert erstmal nur für einen Tag und ohne auf die Zeit richtig zu achten
  */
 class Schedule {
-    ArrayList<Screening> showsOnCurrentDay;
+    private ArrayList<Theatre> theatres = new ArrayList<Theatre>();
+    private ArrayList<Screening> showsOnCurrentDay = new ArrayList<Screening>();
     // gibt jedem Screening automatisch beim Erstellen eine Nummer, sodass sie einfach unterscheidbar sind
-    private int screeningNumber; 
+    private int screeningNumber;
 
     public Schedule() {
-        showsOnCurrentDay = new ArrayList<Screening>();
+        setUp();
         screeningNumber = 0;
-
-        addScreening("Good Fellas", 1, 1);
-        addScreening("Pulp Fiction", 1, 3);
-        addScreening("Fargo", 1, 5);
-        addScreening("Léon", 2, 5);
+    }
+    
+    public void setUp() {
+        Theatre theatre1 = new Theatre(1);
+        theatre1.addSeatRow(3);
+        theatre1.addSeatRow(3);
+        theatre1.addSeatRow(2);
+        theatres.add(theatre1);
+        
+        Theatre theatre2 = new Theatre(2);
+        theatre2.addSeatRow(5);
+        theatre2.addSeatRow(4);
+        theatre2.addSeatRow(3);
+        theatre2.addSeatRow(2);
+        theatre2.addSeatRow(1);
+        theatres.add(theatre2);
+        
+        addScreening("Good Fellas", theatre1, 1);
+        addScreening("Pulp Fiction", theatre1, 3);
+        addScreening("Fargo", theatre1, 5);
+        addScreening("Léon", theatre2, 5);
+    }
+    
+    public Theatre getTheatre(int number) {
+        for (Theatre theatre: theatres) {
+            if (theatre.getNumber() == number) return theatre;
+        }
+        return null;
+    }
+    
+    public int getTotalTheatres() {
+        return theatres.size();
     }
 
-    public void addScreening(String name, int theatreNumber, int time) {
+    public void addScreening(String name, Theatre theatre, int time) {
         screeningNumber++;
-        showsOnCurrentDay.add(new Screening(screeningNumber, name, theatreNumber, time));    
+        showsOnCurrentDay.add(new Screening(screeningNumber, name, theatre, time));    
     }
 
     public void showCurrentDay() {
@@ -53,7 +82,7 @@ class Schedule {
         return null;
     }
 
-    public int getTotalNumberOfScreenings() {
+    public int getTotalScreenings() {
         return showsOnCurrentDay.size();
     }
 }

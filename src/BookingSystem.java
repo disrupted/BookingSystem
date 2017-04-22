@@ -31,7 +31,7 @@ public class BookingSystem {
         System.out.println("type \"add show\" to add a show to the schedule\ntype \"quit\" when you are finished\n");
         System.out.println("----------------------------------------------");
         schedule.showCurrentDay();
-        System.out.println("Please pick a Screening: (1-" + schedule.getTotalNumberOfScreenings() + ")");
+        System.out.println("Please pick a Screening: (1-" + schedule.getTotalScreenings() + ")");
     }
 
     private void printGoodbye() {
@@ -82,13 +82,18 @@ public class BookingSystem {
         String name = reader.next();
         System.out.println("Please enter the time of the screening: (0-23)");
         String maybeTime = reader.next();
-        System.out.println("Please enter the number of the theatre: (1-2)");
+        System.out.println("Please enter the number of the theatre: (1-" + schedule.getTotalTheatres() + ")");
         String maybeNumber = reader.next();    
         if (maybeTime.matches("[0-9]+") && maybeTime.length() <= 2 && maybeNumber.matches("[0-9]+") && maybeNumber.length() == 1) {
             int time = Integer.parseInt(maybeTime);
             int theatreNumber = Integer.parseInt(maybeNumber);
-            schedule.addScreening(name, theatreNumber, time);
-            System.out.println("\nSucessfully added a show to the schedule.\n");
+            Theatre theatre = schedule.getTheatre(theatreNumber);
+            if (theatre != null) {
+                schedule.addScreening(name, theatre, time);
+                System.out.println("\nSucessfully added a show to the schedule.\n");
+            } else {
+                System.out.println("ERROR: theatre" + theatreNumber + " doesn't exist.");
+            }
         } else { System.out.println("\nERROR adding show. invalid input.\n"); }
     }
 

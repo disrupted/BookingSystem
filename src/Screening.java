@@ -11,17 +11,15 @@ public class Screening {
     Theatre myTheatre;
     private int number;
     private String name;
-    private int theatreNumber;
     private int time;
     private int price = 1; // default
     private HashSet<Booking> myBookings;
 
-    public Screening(int number, String name, int theatreNumber, int time) {
+    public Screening(int number, String name, Theatre theatre, int time) {
         this.name = name;
         this.number = number;
-        this.theatreNumber = theatreNumber;
+        this.myTheatre = theatre;
         this.time = time;
-        createTheatre();
         myBookings = new HashSet<Booking>();
     }
 
@@ -55,28 +53,11 @@ public class Screening {
     }
 
     public int getTheatreNumber() {
-        return theatreNumber;
+        return myTheatre.getNumber();
     }
 
     public String getDetails() {
-        return "#" + number + ":  " + getTimeString() + " – " + name + " – theatre " + theatreNumber;
-    }
-
-    /*
-     * erstellt das Theater in dem das Screening stattfindet
-     */
-    private void createTheatre() {
-        switch (theatreNumber) {
-            case 1:
-            myTheatre = new Theatre1();
-            break;
-            case 2:
-            myTheatre = new Theatre2();
-            break;
-            default:
-            System.out.println("No such theatre: " + theatreNumber);
-            break;
-        }
+        return "#" + number + ":  " + getTimeString() + " – " + name + " – theatre " + myTheatre.getNumber();
     }
 
     /*
