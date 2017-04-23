@@ -12,14 +12,15 @@ public class Screening {
     private int number;
     private String name;
     private int time;
-    private int price = 1; // default
+    private int price;
     private HashSet<Booking> myBookings;
 
-    public Screening(int number, String name, Theatre theatre, int time) {
+    public Screening(int number, String name, Theatre theatre, int time, int price) {
         this.name = name;
         this.number = number;
         this.myTheatre = theatre;
         this.time = time;
+        this.price = price;
         myBookings = new HashSet<Booking>();
     }
 
@@ -55,9 +56,15 @@ public class Screening {
     public int getTheatreNumber() {
         return myTheatre.getNumber();
     }
+    
+    public int getPrice() {
+        return price;
+    }
 
     public String getDetails() {
-        return "#" + number + ":  " + getTimeString() + " – " + name + " – theatre " + myTheatre.getNumber();
+        return "#" + number + ":  " + getTimeString() + " – " 
+        + name + " – theatre " + myTheatre.getNumber()
+        + " - price per ticket: " + price + "€";
     }
 
     /*

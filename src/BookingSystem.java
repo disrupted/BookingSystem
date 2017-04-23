@@ -83,13 +83,15 @@ public class BookingSystem {
         System.out.println("Please enter the time of the screening: (0-23)");
         String maybeTime = reader.next();
         System.out.println("Please enter the number of the theatre: (1-" + schedule.getTotalTheatres() + ")");
-        String maybeNumber = reader.next();    
+        String maybeNumber = reader.next();
+        System.out.println("Please enter the price of one ticket/seat for this screening in whole €");
+        int price = reader.nextInt();
         if (maybeTime.matches("[0-9]+") && maybeTime.length() <= 2 && maybeNumber.matches("[0-9]+") && maybeNumber.length() == 1) {
             int time = Integer.parseInt(maybeTime);
             int theatreNumber = Integer.parseInt(maybeNumber);
             Theatre theatre = schedule.getTheatre(theatreNumber);
             if (theatre != null) {
-                schedule.addScreening(name, theatre, time);
+                schedule.addScreening(name, theatre, time, price);
                 System.out.println("\nSucessfully added a show to the schedule.\n");
             } else {
                 System.out.println("ERROR: theatre" + theatreNumber + " doesn't exist.");

@@ -29,10 +29,10 @@ class Schedule {
         theatre2.addSeatRow(1);
         theatres.add(theatre2);
         
-        addScreening("Good Fellas", theatre1, 1);
-        addScreening("Pulp Fiction", theatre1, 3);
-        addScreening("Fargo", theatre1, 5);
-        addScreening("Léon", theatre2, 5);
+        addScreening("Good Fellas", theatre1, 1, 10);
+        addScreening("Pulp Fiction", theatre1, 3, 8);
+        addScreening("Fargo", theatre1, 5, 10);
+        addScreening("Léon", theatre2, 5, 6);
     }
     
     public Theatre getTheatre(int number) {
@@ -46,9 +46,9 @@ class Schedule {
         return theatres.size();
     }
 
-    public void addScreening(String name, Theatre theatre, int time) {
+    public void addScreening(String name, Theatre theatre, int time, int price) {
         screeningNumber++;
-        showsOnCurrentDay.add(new Screening(screeningNumber, name, theatre, time));    
+        showsOnCurrentDay.add(new Screening(screeningNumber, name, theatre, time, price));    
     }
 
     public void showCurrentDay() {
@@ -56,7 +56,12 @@ class Schedule {
         String indent = "                  "; // 20 spaces.
         for (Screening screening: showsOnCurrentDay) {
             String space = indent.substring(0, 20 - screening.getName().length());
-            result += "#" + screening.getNumber() + ":  " + screening.getTimeString() + " – " + screening.getName() + space + " → theatre " + screening.getTheatreNumber() + "\n";
+            result += "#" + screening.getNumber() + ":  " 
+            + screening.getTimeString() + " – " 
+            + screening.getName() + space 
+            + " → theatre "+ screening.getTheatreNumber() 
+            + "  |  Price per Ticket: " + screening.getPrice() + "€"
+            + "\n";           
         }
         System.out.println(result);
     }
