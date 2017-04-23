@@ -14,10 +14,10 @@ public class Theatre {
         seats = new ArrayList<Seat>();
     }
 
-    public void addSeatRow(int rowLength) {
+    public void addSeatRow(int rowLength, double seatPrice) {
         rowNumber++;
         for (int seatNumber=1; seatNumber <= rowLength; seatNumber++) {
-            Seat seat = new Seat(rowNumber, seatNumber);
+            Seat seat = new Seat(rowNumber, seatNumber, seatPrice);
             seats.add(seat);
         }
     }
@@ -30,8 +30,22 @@ public class Theatre {
         return number;
     }
 
-    public int getNumberOfSeats() {
+    public int getTotalSeats() {
         return seats.size();
+    }
+    
+    public int getTotalRows() {
+        return rowNumber;
+    }
+    
+    public int getTotalSeats(int rowNumber) {
+        int totalSeats = 0;
+        for (Seat seat: seats) {
+            if ((seat.getRow() == rowNumber)) {
+                totalSeats++;
+            }
+        }
+        return totalSeats;
     }
     
     public Seat getSeat(int row, int seatNumber) {
@@ -48,24 +62,32 @@ public class Theatre {
     }
 
     public String getSeatStatus() {
-        int totalBooked = 0; // counts the total number of booked seats in this theatre
-        String result = "\n#####  Theatre " + number + " seat map  #####\n################################\n\n rows  |   seats\n–––––––––––––––––––––––––––––——–";
+        double rowPrice = 0;
+        String result = "\n#####  Theatre " + number + " seat map  #####\n################################\n\n rows  |  price  |   SEATS                \n–––––––––––––––––––––––––––––——––––––––––";
         for (int currentRow = 1; currentRow <= seats.get(seats.size() - 1).getRow(); currentRow++) { // for each row of seats
-            result += "\n  #" + currentRow + "   |  ";
+            result += "\n  #" + currentRow + "   |  " + getSeat(currentRow, 1).getPrice() + "0€  |  ";
             for (int i = 0; i < seats.size(); i++) {
                 if (seats.get(i).getRow() == currentRow) {
                     if (seats.get(i).isBooked()) {
                         result += " X ";
-                        totalBooked++;
                     } else {
                         result += " " + seats.get(i).getNumber() + " ";
                     }
                 }
             }
         }
-        if (totalBooked == 0) result += "\n\n→ ALL SEATS AVAILABLE";
-        else if (totalBooked == seats.size()) result += "\n\n→ COMPLETELY BOOKED OUT";
-        else result += "\n\n→ " + (seats.size() - totalBooked) + " REMAINING SEATS"; // prints number of remaining seats
+        int remaining = getRemainingSeats();
+        if (remaining == seats.size()) result += "\n\n→ ALL SEATS AVAILABLE";
+        else if (remaining < 1) result += "\n\n→ COMPLETELY BOOKED OUT";
+        else result += "\n\n→ " + remaining + " REMAINING SEATS"; // prints number of remaining seats
         return result + "\n";
+    }
+    
+    public int getRemainingSeats() {
+        int totalBooked = 0; // counts the total number of booked seats in this theatre
+        for (Seat seat : seats) {
+            if (seat.isBooked()) totalBooked++;
+        }
+        return seats.size() - totalBooked;
     }
 }

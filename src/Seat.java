@@ -8,10 +8,12 @@
 public class Seat {
     private int row, number;
     private boolean booked = false;
+    private double price;
 
-    public Seat(int rowNumber, int seatNumber) {
+    public Seat(int rowNumber, int seatNumber, double price) {
         this.row = rowNumber;
         this.number = seatNumber;
+        this.price = price;
     }
 
     public int getRow() {
@@ -20,6 +22,10 @@ public class Seat {
 
     public int getNumber() {
         return number;
+    }
+    
+    public double getPrice() {
+        return price;
     }
 
     public boolean isBooked() {

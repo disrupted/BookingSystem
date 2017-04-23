@@ -1,18 +1,20 @@
 #BlueJ class context
 comment0.target=Seat
 comment0.text=\n\ Object\ of\ this\ class\ are\ representing\ a\ seat\ throughout\ a\ screening\ \n\ (the\ same\ "real"\ seat\ is\ represented\ by\ a\ different\ instance\ on\ two\ different\ screenings\ in\ this\ programm)\n\ \n\ Responsibilities\:\ The\ seat\ object\ knows\ its\ row\ and\ number\ and\ know\ if\ it\ is\ booked\ or\ not,\n\ also\ it\ can\ be\ booked\ or\ unbooked\ via\ the\ changeStatus()\ Method\n
-comment1.params=rowNumber\ seatNumber
-comment1.target=Seat(int,\ int)
+comment1.params=rowNumber\ seatNumber\ price
+comment1.target=Seat(int,\ int,\ double)
 comment2.params=
 comment2.target=int\ getRow()
 comment3.params=
 comment3.target=int\ getNumber()
 comment4.params=
-comment4.target=boolean\ isBooked()
+comment4.target=double\ getPrice()
 comment5.params=
-comment5.target=void\ changeStatus()
+comment5.target=boolean\ isBooked()
 comment6.params=
-comment6.target=boolean\ book()
+comment6.target=void\ changeStatus()
 comment7.params=
-comment7.target=boolean\ unbook()
-numComments=8
+comment7.target=boolean\ book()
+comment8.params=
+comment8.target=boolean\ unbook()
+numComments=9

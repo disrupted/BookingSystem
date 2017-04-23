@@ -16,17 +16,17 @@ class Schedule {
     
     public void setUp() {
         Theatre theatre1 = new Theatre(1);
-        theatre1.addSeatRow(3);
-        theatre1.addSeatRow(3);
-        theatre1.addSeatRow(2);
+        theatre1.addSeatRow(3, 1);
+        theatre1.addSeatRow(3, 1.5);
+        theatre1.addSeatRow(2, 2);
         theatres.add(theatre1);
         
         Theatre theatre2 = new Theatre(2);
-        theatre2.addSeatRow(5);
-        theatre2.addSeatRow(4);
-        theatre2.addSeatRow(3);
-        theatre2.addSeatRow(2);
-        theatre2.addSeatRow(1);
+        theatre2.addSeatRow(5, 1);
+        theatre2.addSeatRow(4, 1);
+        theatre2.addSeatRow(3, 1.5);
+        theatre2.addSeatRow(2, 2);
+        theatre2.addSeatRow(1, 3);
         theatres.add(theatre2);
         
         addScreening("Good Fellas", theatre1, 1);
@@ -56,7 +56,7 @@ class Schedule {
         String indent = "                  "; // 20 spaces.
         for (Screening screening: showsOnCurrentDay) {
             String space = indent.substring(0, 20 - screening.getName().length());
-            result += "#" + screening.getNumber() + ":  " + screening.getTimeString() + " – " + screening.getName() + space + " → theatre " + screening.getTheatreNumber() + "\n";
+            result += "#" + screening.getNumber() + ":  " + screening.getTimeString() + " – " + screening.getName() + space + " → Theatre " + screening.getTheatreNumber() + "\n";
         }
         System.out.println(result);
     }
