@@ -170,7 +170,6 @@ public class BookingSystem {
         if (booking != null) {
             // edit booking
             System.out.println("What do you want to edit?\ntype \"add\" to add seat\ntype \"delete\" to delete seat\ntype \"back\" to go back\n");
-            //boolean bookingIsEdited = true;
             menu: while (true) {
                 System.out.print("> ");
                 String input = reader.nextLine();
@@ -182,6 +181,7 @@ public class BookingSystem {
                     System.out.println("or \"delete\" to delete a booking\ntype \"back\" to go back to inspection menu\n");
                     break menu;
                     case "add":
+                    /* add seats to booking as long as it is successful */
                     nextBooking: while (addSeat(screening, booking)) {
                         System.out.println("Do you want to book another seat? (Y/N)");
                         switch (reader.next()) {
@@ -236,14 +236,5 @@ public class BookingSystem {
         String input = reader.nextLine().toLowerCase();
         if (input.equals("quit")) { finished = true; }
         return input;
-        //return reader.nextLine().toLowerCase();     // gibt die komplete Line aus
-    }
-
-    /*public Customer addCustomer(String name, String telephoneNumber) {
-    return new Customer(name, telephoneNumber);
-    }*/
-
-    private void userInterface() {
-
     }
 }
