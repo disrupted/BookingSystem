@@ -169,7 +169,7 @@ public class BookingSystem {
     private void editBooking(Screening screening, Booking booking) {
         if (booking != null) {
             // edit booking
-            System.out.println("What do you want to edit?\ntype \"add\" to add seat\ntype \"delete\" to delete seat\ntype \"back\" to go back\n");
+            System.out.println("What do you want to edit?\ntype \"add\" to add seat\ntype \"addX\"to add neighbouring seats\"delete\" to delete seat\ntype \"back\" to go back\n");
             //boolean bookingIsEdited = true;
             menu: while (true) {
                 System.out.print("> ");
@@ -191,6 +191,18 @@ public class BookingSystem {
                             break nextBooking;
                         }
                     }
+                    //
+                    case "addX":
+                    nextBooking: while (addXSeat(screening, booking)) {
+                        System.out.println("Do you want to book another seat? (Y/N)");
+                        switch (reader.next()) {
+                            case "y":
+                            break;
+                            default:
+                            break nextBooking;
+                        }
+                    }
+                    //
                     break;
                     case "delete":
                     System.out.println("Please enter the row of the seat:");
@@ -226,6 +238,33 @@ public class BookingSystem {
         } catch (Exception e) { System.out.println("ERROR: " + e);}
         return false;
     }
+    
+    private boolean addXSeat(Screening screening, Booking inspectedBooking) {
+        try {
+            screening.getSeatStatus();
+            System.out.println("Please enter the row of the seat: (1-" + screening.getTheatre().getTotalRows() + ")");
+            int row = reader.nextInt();
+            System.out.println("Please enter the number of the seat: (1-" + screening.getTheatre().getTotalSeats(row) + ")");
+            int number = reader.nextInt();
+            System.out.println("Please enter the number of neighbouring seats to the right: ");
+            int neighNumber = reader.nextInt();
+           // System.out.println("Do you want to book this seat for " + inspectedBooking.convertEuro(screening.getTheatre().getSeat(row, number).getPrice()) + " ? (Y/N)");
+           System.out.println("Do you want to book these seats for " + inspectedBooking.convertEuro((screening.getTheatre().getSeat(row, number).getPrice())*(neighNumber+1)) + " ? (Y/N)");
+            switch (reader.next()) {
+                case "y": 
+                inspectedBooking.bookSeat(screening.getTheatre(), row, number);
+                for(int i = number; i<=neighNumber; i++){
+                   inspectedBooking.bookSeat(screening.getTheatre(), row, i+1); 
+                }
+                return true;
+                default:
+                System.out.println("Booking cancelled.\n");
+                break;
+            }
+        } catch (Exception e) { System.out.println("ERROR: " + e);}
+        return false;
+    }
+
 
     private void deleteBooking(Screening screening) {
         screening.deleteBooking(customerLogin(screening));
