@@ -78,18 +78,14 @@ public class Screening {
         myBookings.add(new Booking(new Customer(name,telephoneNumber)));
 
     }
-
-    public void deleteBooking(String name) {
-        Iterator<Booking> bi = myBookings.iterator();
-        while (bi.hasNext()) {
-            Booking currentBooking = bi.next();
-            if (currentBooking.getCustomer().getName().equals(name)) {
-                myBookings.remove(currentBooking);
-                System.out.println("deleted sucessfully");
-                return;
-            }
-        }
-        System.out.println("Error - could not delete");
+    
+    public boolean deleteBooking(Booking booking) {
+        try {
+            myBookings.remove(booking);
+            System.out.println("Booking successfully deleted.");
+            return true;
+        } catch (Exception e) { System.out.println("ERROR: " + e); }
+        return false;
     }
 
     /*

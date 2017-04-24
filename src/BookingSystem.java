@@ -228,10 +228,7 @@ public class BookingSystem {
     }
 
     private void deleteBooking(Screening screening) {
-        //ask for the name of the customer, so we can find the right booking to delete
-        System.out.println("Please enter the name of customer assigned to the booking");
-        String name = reader.next();
-        screening.deleteBooking(name);
+        screening.deleteBooking(customerLogin(screening));
     }
 
     public String getInput() {
